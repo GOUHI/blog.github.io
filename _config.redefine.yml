@@ -1,0 +1,68 @@
+info:
+  title: 李狗嗨的博客
+  author: 李狗嗨
+defaults:
+  logo: https://gouhi-blog.oss-cn-shanghai.aliyuncs.com/logo/logo2.png
+  avatar: https://gouhi-blog.oss-cn-shanghai.aliyuncs.com/logo/logo.png
+
+# 第一屏
+home_banner:
+  title: 温故而知新
+
+# 全局功能
+global:
+  busuanzi_counter:
+    enable: false
+
+# 页脚
+footer:
+  runtime: false
+  customize: <span>温故而知新</span>
+# 分类
+navbar:
+  categories:
+    Categories: #取名随意
+        icon: fa-solid fa-folder #图标
+        path: /categories/ #链接
+  tags:
+    Tags: #取名随意
+        icon: fa-solid fa-tags #图标
+        path: /tags/ #链接
+  archives: 
+    Archives:
+      icon: fa-solid fa-tags #图标
+      path: /archives/ #链接
+  links:
+    Tools:
+      icon: fa-light fa-toolbox
+      submenus:
+        pixabay: https://pixabay.com/
+        fontawesome: https://fontawesome.com/search/
+        redefine-docs: https://redefine-docs.ohevan.com/getting-started
+    Archives:
+      icon: fa-regular fa-user
+      path: /archives/
+    About:
+      icon: fa-regular fa-user
+      path: /about/
+page_templates: 
+  tags_style: cloud
+# 文章
+articles:
+  copyright: false
+  code_block:
+    style: mac
+
+# 评论
+comment:
+  enable: false
+
+# 插件
+plugins:
+  aplayer: # APlayer
+    enable: true
+    audios:
+      - name: 不如
+        artist: 秦海清
+        url: https://gouhi-map3.oss-cn-shanghai.aliyuncs.com/%E4%B8%8D%E5%A6%82/%E4%B8%8D%E5%A6%82.mp3
+        cover: https://gouhi-map3.oss-cn-shanghai.aliyuncs.com/%E4%B8%8D%E5%A6%82/%E4%B8%8D%E5%A6%82.jpg
