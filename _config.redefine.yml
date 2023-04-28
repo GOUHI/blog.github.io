@@ -62,6 +62,10 @@ plugins:
   aplayer: # APlayer
     enable: true
     audios:
+      - name: 余韻叙情(E-6)
+        artist: 鷺巣詩郎
+        url: https://gouhi-map3.oss-cn-shanghai.aliyuncs.com/%E4%BD%99%E9%9F%BB%E5%8F%99%E6%83%85/%E4%BD%99%E9%9F%BB%E5%8F%99%E6%83%85%28E-6%29.mp3
+        cover: https://gouhi-map3.oss-cn-shanghai.aliyuncs.com/%E4%BD%99%E9%9F%BB%E5%8F%99%E6%83%85/%E4%BD%99%E9%9F%BB%E5%8F%99%E6%83%85%28E-6%29.jpg
       - name: 不如
         artist: 秦海清
         url: https://gouhi-map3.oss-cn-shanghai.aliyuncs.com/%E4%B8%8D%E5%A6%82/%E4%B8%8D%E5%A6%82.mp3
