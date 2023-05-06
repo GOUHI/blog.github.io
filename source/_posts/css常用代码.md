@@ -74,3 +74,15 @@ vue2: @keyup.enter.native="方法名称"
 vue3: v-on:keyup.enter="方法名称"
 ```
 
+
+
+### scss做尺寸不同的样式代码
+
+```
+@media screen and (max-width: 1660px) {
+  .search_item{
+    width: 150px;
+  }
+}
+```
+

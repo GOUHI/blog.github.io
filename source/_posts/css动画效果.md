@@ -1,0 +1,33 @@
+---
+title: css动画效果
+categories: 'css'
+tags: 
+    - "动画"
+    - "代码片段"
+---
+
+### 参考网站：`https://animista.net/play`
+
+
+
+> 整体向上
+
+```
+animation: float 3s ease-in-out infinite;
+
+@keyframes float {
+  0% {
+    box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+    transform: translatey(0px);
+  }
+  50% {
+    box-shadow: 0 25px 15px 0px rgba(0,0,0,0.2);
+    transform: translatey(-20px);
+  }
+  100% {
+    box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+    transform: translatey(0px);
+  }
+}
+```
+
