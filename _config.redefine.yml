@@ -4,9 +4,15 @@ info:
 defaults:
   logo: https://gouhi-blog.oss-cn-shanghai.aliyuncs.com/logo/logo2.png
   avatar: https://gouhi-blog.oss-cn-shanghai.aliyuncs.com/logo/logo.png
+  favicon: https://gouhi-blog.oss-cn-shanghai.aliyuncs.com/icon/favicon.ico
 
 # 第一屏
 home_banner:
+  subtitle:
+    hitokoto:
+      enable: true
+      api: https://international.v1.hitokoto.cn/
+    text: ['读书不觉已春深，一寸光阴一寸金。', '古人学问无遗力，少壮工夫老始成。', '读书破万卷，下笔如有神。']
   title: 温故而知新
 
 # 全局功能
@@ -36,9 +42,9 @@ navbar:
     Tools:
       icon: fa-light fa-toolbox
       submenus:
-        pixabay: https://pixabay.com/
-        fontawesome: https://fontawesome.com/search/
-        redefine-docs: https://redefine-docs.ohevan.com/getting-started
+        pixabay-图片: https://pixabay.com/
+        fontawesome-图标: https://fontawesome.com/search/
+        redefine-docs-文档: https://redefine-docs.ohevan.com/getting-started
     Archives:
       icon: fa-regular fa-user
       path: /archives/
@@ -62,6 +68,10 @@ plugins:
   aplayer: # APlayer
     enable: true
     audios:
+      - name: 余韻叙情(E-6)
+        artist: 鷺巣詩郎
+        url: https://gouhi-map3.oss-cn-shanghai.aliyuncs.com/%E4%BD%99%E9%9F%BB%E5%8F%99%E6%83%85/%E4%BD%99%E9%9F%BB%E5%8F%99%E6%83%85%28E-6%29.mp3
+        cover: https://gouhi-map3.oss-cn-shanghai.aliyuncs.com/%E4%BD%99%E9%9F%BB%E5%8F%99%E6%83%85/%E4%BD%99%E9%9F%BB%E5%8F%99%E6%83%85%28E-6%29.jpg
       - name: 不如
         artist: 秦海清
         url: https://gouhi-map3.oss-cn-shanghai.aliyuncs.com/%E4%B8%8D%E5%A6%82/%E4%B8%8D%E5%A6%82.mp3
