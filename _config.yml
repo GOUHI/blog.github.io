@@ -104,5 +104,5 @@ theme: redefine
 deploy:
   type: git
   repo: https://github.com/GOUHI/blog2.github.io.git
-  branch: main
+  branch: gh-pages
   message: updated:{{ now("yyyy-MM-DD HH:mm:ss")}}
