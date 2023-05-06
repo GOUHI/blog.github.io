@@ -102,4 +102,7 @@ theme: redefine
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: git
+  repo: https://github.com/GOUHI/blog2.github.io.git
+  branch: main
+  message: updated:{{ now("yyyy-MM-DD HH:mm:ss")}}
