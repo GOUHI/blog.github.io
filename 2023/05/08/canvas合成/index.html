@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="博客 温故而知新 vue node 露营">
+    
+    <meta name="author" content="李狗嗨">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2023/05/08/canvas合成/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="场景使用 需要通过一张图片，加上二维码生成一张海报。 通过使用canvas绘画的技术来生成此海报。 记录仅提供思路，场景运用可以有很多      创建数据123456789101112131415161718import posterBgImg from &amp;#x27;..&#x2F;..&#x2F;..&#x2F;assets&#x2F;img&#x2F;wxwork&#x2F;activity&#x2F;bg.png&amp;#x27;;export default &amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用canvas合成两张图片(用于海报中的二维码)">
+<meta property="og:url" content="http://example.com/2023/05/08/canvas%E5%90%88%E6%88%90/index.html">
+<meta property="og:site_name" content="李狗嗨的博客">
+<meta property="og:description" content="场景使用 需要通过一张图片，加上二维码生成一张海报。 通过使用canvas绘画的技术来生成此海报。 记录仅提供思路，场景运用可以有很多      创建数据123456789101112131415161718import posterBgImg from &amp;#x27;..&#x2F;..&#x2F;..&#x2F;assets&#x2F;img&#x2F;wxwork&#x2F;activity&#x2F;bg.png&amp;#x27;;export default &amp;#">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gouhi-typora.oss-cn-shanghai.aliyuncs.com/uPic/image%20%285%29.png">
+<meta property="article:published_time" content="2023-05-08T02:23:47.371Z">
+<meta property="article:modified_time" content="2023-05-08T02:23:47.371Z">
+<meta property="article:author" content="Gouhi Lee">
+<meta property="article:tag" content="图片">
+<meta property="article:tag" content="合成">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gouhi-typora.oss-cn-shanghai.aliyuncs.com/uPic/image%20%285%29.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="https://gouhi-blog.oss-cn-shanghai.aliyuncs.com/icon/favicon.ico" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://gouhi-blog.oss-cn-shanghai.aliyuncs.com/icon/favicon.ico">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="https://gouhi-blog.oss-cn-shanghai.aliyuncs.com/icon/favicon.ico">
+    <!--- Page Info-->
+    
+    <title>
+        
+            使用canvas合成两张图片(用于海报中的二维码) -
+        
+        李狗嗨的博客
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/assets/fonts.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[""]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":false,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"busuanzi_counter":{"enable":false,"site_pv":true,"site_uv":true,"post_pv":true},"pjax":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"static","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"温故而知新","subtitle":{"text":["读书不觉已春深，一寸光阴一寸金。","古人学问无遗力，少壮工夫老始成。","读书破万卷，下笔如有神。"],"hitokoto":{"enable":true,"api":"https://international.v1.hitokoto.cn/"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":true,"type":"fixed","audios":[{"name":"余韻叙情(E-6)","artist":"鷺巣詩郎","url":"https://gouhi-map3.oss-cn-shanghai.aliyuncs.com/%E4%BD%99%E9%9F%BB%E5%8F%99%E6%83%85/%E4%BD%99%E9%9F%BB%E5%8F%99%E6%83%85%28E-6%29.mp3","cover":"https://gouhi-map3.oss-cn-shanghai.aliyuncs.com/%E4%BD%99%E9%9F%BB%E5%8F%99%E6%83%85/%E4%BD%99%E9%9F%BB%E5%8F%99%E6%83%85%28E-6%29.jpg"},{"name":"不如","artist":"秦海清","url":"https://gouhi-map3.oss-cn-shanghai.aliyuncs.com/%E4%B8%8D%E5%A6%82/%E4%B8%8D%E5%A6%82.mp3","cover":"https://gouhi-map3.oss-cn-shanghai.aliyuncs.com/%E4%B8%8D%E5%A6%82/%E4%B8%8D%E5%A6%82.jpg"}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.1.3","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tools":{"icon":"fa-light fa-toolbox","submenus":{"pixabay-图片":"https://pixabay.com/","fontawesome-图标":"https://fontawesome.com/search/","redefine-docs-文档":"https://redefine-docs.ohevan.com/getting-started"}},"Archives":{"icon":"fa-regular fa-user","path":"/archives/"},"About":{"icon":"fa-regular fa-user","path":"/about/"}},"search":{"enable":false,"preload":true},"categories":{"Categories":{"icon":"fa-solid fa-folder","path":"/categories/"}},"tags":{"Tags":{"icon":"fa-solid fa-tags","path":"/tags/"}},"archives":{"Archives":{"icon":"fa-solid fa-tags","path":"/archives/"}}},"page_templates":{"friends_column":2,"tags_style":"cloud"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":null},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}}};
+    Global.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="main-content-container">
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="https://gouhi-blog.oss-cn-shanghai.aliyuncs.com/logo/logo2.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+                
+                李狗嗨的博客
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        首页
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown" 
+                                    href="#" onClick="return false;">
+                                    
+                                        
+                                            <i class="fa-light fa-toolbox"></i>
+                                        
+                                        TOOLS&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://pixabay.com/">PIXABAY-图片
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://fontawesome.com/search/">FONTAWESOME-图标
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://redefine-docs.ohevan.com/getting-started">REDEFINE-DOCS-文档
+                                        </a>
+                                        </li>
+                                    
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/archives/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-user"></i>
+                                        
+                                        归档
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/about/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-user"></i>
+                                        
+                                        关于
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer">
+        <ul class="drawer-navbar-list">
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                首页
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="has-dropdown" 
+                        href="#" onClick="return false;">
+                            
+                                
+                                    <i class="fa-light fa-toolbox"></i>
+                                
+                                TOOLS&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                              
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://pixabay.com/">PIXABAY-图片</a>
+                            </li>
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://fontawesome.com/search/">FONTAWESOME-图标</a>
+                            </li>
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://redefine-docs.ohevan.com/getting-started">REDEFINE-DOCS-文档</a>
+                            </li>
+                        
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/archives/"  >
+                             
+                                
+                                    <i class="fa-regular fa-user"></i>
+                                
+                                归档
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/about/"  >
+                             
+                                
+                                    <i class="fa-regular fa-user"></i>
+                                
+                                关于
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            
+            
+                <div class="article-title">
+                    <h1 class="article-title-regular">使用canvas合成两张图片(用于海报中的二维码)</h1>
+                </div>
+            
+                
+            
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="https://gouhi-blog.oss-cn-shanghai.aliyuncs.com/logo/logo.png">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">李狗嗨</span>
+                            
+                                <span class="author-label"></span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-05-08 10:23:47</span>
+        <span class="mobile">2023-05-08 10:23</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-05-08 10:23:47</span>
+            <span class="mobile">2023-05-08 10:23</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/canvas/">canvas</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E5%9B%BE%E7%89%87/">图片</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E5%90%88%E6%88%90/">合成</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <div class="note-large notel-blue"><div class="notel-title"><p>场景使用</p>
+</div><div class="notel-content"><p>需要通过一张图片，加上二维码生成一张海报。</p>
+<p>通过使用canvas绘画的技术来生成此海报。</p>
+<p>记录仅提供思路，场景运用可以有很多</p>
+ </div></div>
+
+
+
+<h3 id="创建数据"><a href="#创建数据" class="headerlink" title="创建数据"></a>创建数据</h3><div class="highlight-container" data-rel="Javascript"><figure class="iseeu highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> posterBgImg <span class="keyword">from</span> <span class="string">&#x27;../../../assets/img/wxwork/activity/bg.png&#x27;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;push-new&#x27;</span>,</span><br><span class="line">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="comment">// 原海报地址</span></span><br><span class="line">      posterBgImg,</span><br><span class="line">      <span class="comment">// 二维码地址</span></span><br><span class="line">      <span class="attr">qrcodeImg</span>: <span class="string">&#x27;https://wework.qpic.cn/wwpic/735241_H5vgyBZzRPOaLOk_1636357487/0&#x27;</span>,</span><br><span class="line">      <span class="comment">// 微信头像地址</span></span><br><span class="line">      <span class="attr">avatar</span>: <span class="string">&#x27;http://thirdwx.qlogo.cn/mmopen/PiajxSqBRaEIydoxiaoUddycLyAfUGY9icNOgsLyOS8Rp22pZp4BPNjzOkj5kIehECJjkbG7t2cCVSHgdEcc2XUNQ/132&#x27;</span>,</span><br><span class="line">      <span class="comment">// 微信昵称</span></span><br><span class="line">      <span class="attr">nickname</span>: <span class="string">&#x27;李狗嗨&#x27;</span>,</span><br><span class="line">      <span class="comment">// 生成海报地址</span></span><br><span class="line">      <span class="attr">preview</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure></div>
+
+<h3 id="绘制背景（本地地址，直接获取）"><a href="#绘制背景（本地地址，直接获取）" class="headerlink" title="绘制背景（本地地址，直接获取）"></a>绘制背景（本地地址，直接获取）</h3><div class="highlight-container" data-rel="Javascript"><figure class="iseeu highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">drawBgImage</span>(<span class="params">canvas, ctx</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> bg = <span class="keyword">new</span> <span class="title class_">Image</span>();</span><br><span class="line">    bg.<span class="property">src</span> = <span class="variable language_">this</span>.<span class="property">posterBgImg</span>;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(bg.<span class="property">src</span>);</span><br><span class="line">    bg.<span class="title function_">setAttribute</span>(<span class="string">&#x27;crossOrigin&#x27;</span>, <span class="string">&#x27;anonymous&#x27;</span>)</span><br><span class="line">    bg.<span class="property">onload</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      ctx.<span class="title function_">drawImage</span>(bg, <span class="number">0</span>, <span class="number">0</span>, canvas.<span class="property">width</span>, canvas.<span class="property">height</span>);</span><br><span class="line">      <span class="title function_">resolve</span>();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="绘制远程二维码（先下载转base64再进行绘制）"><a href="#绘制远程二维码（先下载转base64再进行绘制）" class="headerlink" title="绘制远程二维码（先下载转base64再进行绘制）"></a>绘制远程二维码（先下载转base64再进行绘制）</h3><div class="highlight-container" data-rel="Javascript"><figure class="iseeu highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">drawQrImage</span>(<span class="params">canvas, ctx</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> qr = <span class="keyword">new</span> <span class="title class_">Image</span>();</span><br><span class="line">    qr.<span class="property">src</span> = <span class="variable language_">this</span>.<span class="property">qrcodeImg</span>;</span><br><span class="line">    qr.<span class="title function_">setAttribute</span>(<span class="string">&#x27;crossOrigin&#x27;</span>, <span class="string">&#x27;anonymous&#x27;</span>)</span><br><span class="line">    qr.<span class="property">onload</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      ctx.<span class="title function_">drawImage</span>(qr, <span class="number">35</span>, <span class="number">986</span>, <span class="number">170</span>, <span class="number">170</span>);</span><br><span class="line">      <span class="title function_">resolve</span>();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="绘制微信头像（远程地址，注意跨域）"><a href="#绘制微信头像（远程地址，注意跨域）" class="headerlink" title="绘制微信头像（远程地址，注意跨域）"></a>绘制微信头像（远程地址，注意跨域）</h3><div class="highlight-container" data-rel="Javascript"><figure class="iseeu highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">drawAvatarImage</span>(<span class="params">canvas, ctx</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> avatar = <span class="keyword">new</span> <span class="title class_">Image</span>();</span><br><span class="line">    avatar.<span class="property">src</span> = <span class="variable language_">this</span>.<span class="property">avatar</span>;</span><br><span class="line">  </span><br><span class="line">    avatar.<span class="title function_">setAttribute</span>(<span class="string">&#x27;crossOrigin&#x27;</span>, <span class="string">&#x27;anonymous&#x27;</span>)</span><br><span class="line">    avatar.<span class="property">onload</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      <span class="comment">// 圆角修改</span></span><br><span class="line">      ctx.<span class="title function_">arc</span>(<span class="number">80</span>, <span class="number">80</span>, <span class="number">40</span>, <span class="number">0</span>, <span class="number">2</span> * <span class="title class_">Math</span>.<span class="property">PI</span>);</span><br><span class="line">      ctx.<span class="title function_">clip</span>();</span><br><span class="line">      ctx.<span class="title function_">drawImage</span>(avatar, <span class="number">40</span>, <span class="number">40</span>, <span class="number">80</span>, <span class="number">80</span>);</span><br><span class="line">      <span class="title function_">resolve</span>();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="绘制微信文字（文本）"><a href="#绘制微信文字（文本）" class="headerlink" title="绘制微信文字（文本）"></a>绘制微信文字（文本）</h3><div class="highlight-container" data-rel="Javascript"><figure class="iseeu highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">drawNicknameText</span>(<span class="params">canvas, ctx</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    ctx.<span class="property">font</span> = <span class="string">&#x27;bold 30px serif&#x27;</span>;</span><br><span class="line">    ctx.<span class="property">fillStyle</span> = <span class="string">&#x27;#fff&#x27;</span></span><br><span class="line">    ctx.<span class="title function_">fillText</span>(<span class="variable language_">this</span>.<span class="property">nickname</span>, <span class="number">133</span>, <span class="number">75</span>);</span><br><span class="line">    <span class="title function_">resolve</span>();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="编写回调"><a href="#编写回调" class="headerlink" title="编写回调"></a>编写回调</h3><div class="highlight-container" data-rel="Javascript"><figure class="iseeu highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">getCanvasBlob</span>(<span class="params">canvas</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    canvas.<span class="title function_">toBlob</span>(<span class="function">(<span class="params">b</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">resolve</span>(b);</span><br><span class="line">    &#125;, <span class="string">&#x27;image/png&#x27;</span>, <span class="number">1.0</span>)</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="创建画板"><a href="#创建画板" class="headerlink" title="创建画板"></a>创建画板</h3><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">// 生成海报</span><br><span class="line">async createPoster() &#123;</span><br><span class="line">  const canvas = document.createElement(&#x27;canvas&#x27;);</span><br><span class="line">  canvas.width = 670;</span><br><span class="line">  canvas.height = 1192;</span><br><span class="line"></span><br><span class="line">  const ctx = canvas.getContext(&#x27;2d&#x27;);</span><br><span class="line"></span><br><span class="line">  // 绘制背景</span><br><span class="line">  await this.drawBgImage(canvas, ctx);</span><br><span class="line"></span><br><span class="line">  // 绘制二维码</span><br><span class="line">  await this.drawQrImage(canvas, ctx);</span><br><span class="line"></span><br><span class="line">  // 绘制微信名称</span><br><span class="line">  await this.drawNicknameText(canvas, ctx)</span><br><span class="line"></span><br><span class="line">  // 绘制微信头像</span><br><span class="line">  await this.drawAvatarImage(canvas, ctx)</span><br><span class="line"></span><br><span class="line">  this.preview = URL.createObjectURL(await this.getCanvasBlob(canvas));</span><br><span class="line"></span><br><span class="line">  const file = canvas.toDataURL(&#x27;image/png&#x27;);</span><br><span class="line">  console.log(file)</span><br><span class="line"></span><br><span class="line">  // 上传OSS</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></div>
+
+
+
+<blockquote>
+<p>成品展示</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://gouhi-typora.oss-cn-shanghai.aliyuncs.com/uPic/image%20%285%29.png"
+                      alt="image (5)"
+                ></p>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/%E5%9B%BE%E7%89%87/">#图片</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/%E5%90%88%E6%88%90/">#合成</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2023/05/08/JS%E5%B9%B6%E5%8F%91%E8%AF%B7%E6%B1%82demo/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">JS并发请求demo</span>
+                                    <span class="post-nav-item">上一篇</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2023/05/08/css%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">css动画效果</span>
+                                    <span class="post-nav-item">下一篇</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">使用canvas合成两张图片(用于海报中的二维码)</div>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE"><span class="nav-text">创建数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E8%83%8C%E6%99%AF%EF%BC%88%E6%9C%AC%E5%9C%B0%E5%9C%B0%E5%9D%80%EF%BC%8C%E7%9B%B4%E6%8E%A5%E8%8E%B7%E5%8F%96%EF%BC%89"><span class="nav-text">绘制背景（本地地址，直接获取）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E8%BF%9C%E7%A8%8B%E4%BA%8C%E7%BB%B4%E7%A0%81%EF%BC%88%E5%85%88%E4%B8%8B%E8%BD%BD%E8%BD%ACbase64%E5%86%8D%E8%BF%9B%E8%A1%8C%E7%BB%98%E5%88%B6%EF%BC%89"><span class="nav-text">绘制远程二维码（先下载转base64再进行绘制）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%BE%AE%E4%BF%A1%E5%A4%B4%E5%83%8F%EF%BC%88%E8%BF%9C%E7%A8%8B%E5%9C%B0%E5%9D%80%EF%BC%8C%E6%B3%A8%E6%84%8F%E8%B7%A8%E5%9F%9F%EF%BC%89"><span class="nav-text">绘制微信头像（远程地址，注意跨域）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%BE%AE%E4%BF%A1%E6%96%87%E5%AD%97%EF%BC%88%E6%96%87%E6%9C%AC%EF%BC%89"><span class="nav-text">绘制微信文字（文本）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E5%86%99%E5%9B%9E%E8%B0%83"><span class="nav-text">编写回调</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%94%BB%E6%9D%BF"><span class="nav-text">创建画板</span></a></li></ol>
+
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
+
+                
+
+            </div>
+            
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">李狗嗨</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a> 驱动</span>
+                <br>
+            <span class="theme-version-container">主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.1.3</a>
+        </div>
+        
+        
+        
+        
+            <div class="customize-info info-item"><span>温故而知新</span></div>
+        
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/layouts/navbarShrink.js"></script>
+
+<script src="/js/tools/scrollTopBottom.js"></script>
+
+<script src="/js/tools/lightDarkSwitch.js"></script>
+
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/tools/tocToggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/layouts/toc.js"></script>
+
+<script src="/js/plugins/tabs.js"></script>
+
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax',
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            Global.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            Global.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            Global.refresh();
+        });
+    });
+</script>
+
+
+
+
+    <div id="aplayer"></div>
+
+<script src="/js/libs/APlayer.min.js"></script>
+
+
+<script src="/js/plugins/aplayer.js"></script>
+
+
+</body>
+</html>
